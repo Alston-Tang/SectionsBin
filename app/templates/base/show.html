@@ -1,0 +1,16 @@
+{% extends 'base/nav.html' %}
+{% block extra_css %}
+    <!-- Least.js CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/least.min.css') }}">
+    <!-- Custom styles for IndexBoard -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/my.css') }}">
+{% endblock %}
+{% block content %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/least.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/indexBoard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/my.js') }}"></script>
+{% endblock %}
+

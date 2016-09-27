@@ -1,0 +1,81 @@
+$card_shadow: 1px 2px 1px #888888;
+$card_border: 3px solid #F0F0F0;
+$card_background-color: #FFFFFF;
+$card_radius: 5px;
+
+
+$grid_scale: 1 / 2;
+.card{
+  background-color: $card_background-color;
+  border-radius: $card_radius;
+  border: $card_border;
+  box-shadow: $card_shadow;
+  padding: 20px;
+}
+
+.grid-slot{
+  overflow: hidden;
+}
+
+
+@mixin grid($width, $height){
+  &.clickable{
+    cursor: pointer;
+  }
+  width: $width;
+  min-height: $height;
+  >div.grid-upper {
+    margin: 0 -20px;
+    padding: 0 20px;
+    border-bottom: thin solid #DDDDDD;
+    > div.grid-title{
+      font-size: $width / 16;
+    }
+    > div.grid-icon {
+      @if $height > $width{
+        font-size: $width / 2;
+      }
+      @else {
+        font-size: $height / 2;
+      }
+      text-align: center;
+    }
+  }
+  >div.grid-lower {
+    padding: 10px 20px 20px 20px;
+    margin: 0 -20px -20px -20px;
+    text-align: center;
+
+    >div.long{
+      font-size: $width / 12;
+    }
+    >div.number{
+      font-size: $width / 8;
+    }
+  }
+}
+@mixin grid_style($color){
+  &.clickable:hover{
+    background-color: $color;
+    color: #ffffff;
+    >div.grid-upper{
+      >div.grid-icon{
+        color: #ffffff;
+      }
+    }
+  }
+  >div.grid-upper{
+    >div.grid-icon{
+      color:$color;
+    }
+  }
+}
+
+
+.block-header{
+  padding-left: 50px;
+  padding-top: 50px;
+  >h1,h2,h3,h4,h5,h6{
+    font-weight: bold;
+  }
+}

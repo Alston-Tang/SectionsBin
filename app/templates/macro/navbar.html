@@ -1,0 +1,22 @@
+{% macro nav_bar_attr(attr_dict) -%}
+    {% for attr in attr_dict %}
+        {{ attr|safe }}="{{ attr_dict[attr]|safe }}"
+    {% endfor %}
+{%- endmacro %}
+
+{% macro dropdown(name, data, is_active=False) %}
+<li class="dropdown{% if is_active %} active{% endif %}">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        {% for sub_menu in data %}
+            <li> <a {{ nav_bar_attr(data[sub_menu]) }}>{{ sub_menu }}</a> </li>
+        {% endfor %}
+    </ul>
+</li>
+{% endmacro %}
+
+{% macro button(name, data) %}
+<li>
+    <a {{ nav_bar_attr(data) }}>{{ name }}</a>
+</li>
+{% endmacro %}

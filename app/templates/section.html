@@ -1,0 +1,37 @@
+{% extends 'base/nav.html' %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename="stylesheets/noIndexBoard.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename="stylesheets/sections.css") }}">
+{% endblock %}
+{% block content %}
+    <div class="contentBelowNav">
+        {% set count = 0 %}
+        {% for section in sections %}
+            {% if count % 4==0 %}
+                <div class="row">
+            {% endif %}
+        <div class="col-md-3">
+            <div class="thumbnail card">
+                <img class="img-responsive" src="{{ section.preview_img['data'] }}">
+                <div class="caption">
+                    <h3>{{ section.title }}</h3>
+                    <p>Creator:  {{ section.creator }}</p>
+                    <p>Created Time:  {{ section.created_time|pretty_date }}</p>
+                    <p>Modified Time:  {{ section.modified_time|pretty_date }}</p>
+                    <p>
+                        <a href="{{ url_for('edit_fn') }}?sec={{ section.id }}" class="btn btn-primary" role="button">Edit</a>
+                        <a  class="btn btn-danger remove-section" section="{{ section._id }}" role="button">Remove</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% if count % 4 ==3 or count == sections|length %}
+            </div>
+        {% endif %}
+            {% set count=count + 1 %}
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{{ url_for('static',filename='js/manage/section.js') }}"></script>
+{% endblock %}

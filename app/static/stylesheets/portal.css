@@ -1,0 +1,116 @@
+/* line 8, ../design/card.scss */
+.card {
+  background-color: white;
+  border-radius: 5px;
+  border: 3px solid #f0f0f0;
+  box-shadow: 1px 2px 1px #888888;
+  padding: 20px; }
+
+/* line 16, ../design/card.scss */
+.grid-slot {
+  overflow: hidden; }
+
+/* line 75, ../design/card.scss */
+.block-header {
+  padding-left: 50px;
+  padding-top: 50px; }
+  /* line 78, ../design/card.scss */
+  .block-header > h1, .block-header h2, .block-header h3, .block-header h4, .block-header h5, .block-header h6 {
+    font-weight: bold; }
+
+/* Icon Style */
+/* line 58, ../design/card.scss */
+#user-count.clickable:hover {
+  background-color: #ff8080;
+  color: #ffffff; }
+  /* line 62, ../design/card.scss */
+  #user-count.clickable:hover > div.grid-upper > div.grid-icon {
+    color: #ffffff; }
+/* line 68, ../design/card.scss */
+#user-count > div.grid-upper > div.grid-icon {
+  color: #ff8080; }
+
+/* line 58, ../design/card.scss */
+#member-count.clickable:hover {
+  background-color: #4080c8;
+  color: #ffffff; }
+  /* line 62, ../design/card.scss */
+  #member-count.clickable:hover > div.grid-upper > div.grid-icon {
+    color: #ffffff; }
+/* line 68, ../design/card.scss */
+#member-count > div.grid-upper > div.grid-icon {
+  color: #4080c8; }
+
+/* line 58, ../design/card.scss */
+#activity-count.clickable:hover {
+  background-color: #652770;
+  color: #ffffff; }
+  /* line 62, ../design/card.scss */
+  #activity-count.clickable:hover > div.grid-upper > div.grid-icon {
+    color: #ffffff; }
+/* line 68, ../design/card.scss */
+#activity-count > div.grid-upper > div.grid-icon {
+  color: #652770; }
+
+/* line 58, ../design/card.scss */
+#section-count.clickable:hover {
+  background-color: #2c8437;
+  color: #ffffff; }
+  /* line 62, ../design/card.scss */
+  #section-count.clickable:hover > div.grid-upper > div.grid-icon {
+    color: #ffffff; }
+/* line 68, ../design/card.scss */
+#section-count > div.grid-upper > div.grid-icon {
+  color: #2c8437; }
+
+/* line 58, ../design/card.scss */
+#page-count.clickable:hover {
+  background-color: #64685d;
+  color: #ffffff; }
+  /* line 62, ../design/card.scss */
+  #page-count.clickable:hover > div.grid-upper > div.grid-icon {
+    color: #ffffff; }
+/* line 68, ../design/card.scss */
+#page-count > div.grid-upper > div.grid-icon {
+  color: #64685d; }
+
+/* line 26, portal.scss */
+body {
+  background-color: #eeeeee; }
+
+/* line 30, portal.scss */
+.panel-body-no-padding {
+  padding: 0; }
+
+/* line 34, portal.scss */
+.management-grid {
+  width: 300px;
+  min-height: 150px;
+  margin: 50px 20px;
+  float: left; }
+  /* line 22, ../design/card.scss */
+  .management-grid.clickable {
+    cursor: pointer; }
+  /* line 27, ../design/card.scss */
+  .management-grid > div.grid-upper {
+    margin: 0 -20px;
+    padding: 0 20px;
+    border-bottom: thin solid #DDDDDD; }
+    /* line 31, ../design/card.scss */
+    .management-grid > div.grid-upper > div.grid-title {
+      font-size: 18.75px; }
+    /* line 34, ../design/card.scss */
+    .management-grid > div.grid-upper > div.grid-icon {
+      font-size: 75px;
+      text-align: center; }
+  /* line 44, ../design/card.scss */
+  .management-grid > div.grid-lower {
+    padding: 10px 20px 20px 20px;
+    margin: 0 -20px -20px -20px;
+    text-align: center; }
+    /* line 49, ../design/card.scss */
+    .management-grid > div.grid-lower > div.long {
+      font-size: 25px; }
+    /* line 52, ../design/card.scss */
+    .management-grid > div.grid-lower > div.number {
+      font-size: 37.5px; }

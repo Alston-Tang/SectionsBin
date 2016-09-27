@@ -1,0 +1,81 @@
+@import "../design/color";
+@import "../design/card";
+$col-margin: 2%;
+
+body{
+  background-color: $grey-background;
+}
+
+.thm-col{
+  margin: 2%;
+  position: relative;
+  float: left;
+  >img{
+    width: 100%;
+  }
+}
+.thm-left-col{
+  width: 40%-(2*$col-margin);
+}
+
+.thm-middle-col{
+  width: 30%-(2*$col-margin);
+  >#assemble-area{
+    min-height: 100px;
+    border-radius: 6px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  >#delete-group{
+    margin: 20px 0;
+    position: relative;
+    >#delete-area {
+      border-radius: 5px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0);
+      -ms-user-select: none;
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    >#delete-area-base{
+      background-color: $alert-background;
+      color: $alert-color;
+      font-size: 2em;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 200px;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+}
+
+.thm-right-col{
+  width: 30%-(2*$col-margin);
+}
+
+.section{
+  h1,h2,h3,h4,h5,h6{
+    margin-top: 0;
+    border-top: 0;
+  }
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px;
+
+  >.preview-img{
+    display: none;
+  }
+
+  >.section-id{
+    display: none;
+  }
+}

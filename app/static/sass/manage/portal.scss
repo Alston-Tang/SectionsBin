@@ -1,0 +1,38 @@
+@import "../design/color";
+@import "../design/card";
+
+/* Icon Style */
+#user-count{
+  @include grid_style($user-color);
+}
+
+#member-count{
+  @include grid_style($member-color);
+}
+
+#activity-count{
+  @include grid_style($activity-color);
+}
+
+#section-count{
+  @include grid_style($section-color);
+}
+
+#page-count{
+  @include grid_style($page-color);
+}
+
+
+body{
+  background-color: $grey-background;
+}
+
+.panel-body-no-padding{
+  padding: 0;
+}
+
+.management-grid{
+  @include grid(300px, 150px);
+  margin: 50px 20px;
+  float: left;
+}

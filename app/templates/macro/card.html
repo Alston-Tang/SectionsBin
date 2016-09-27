@@ -1,0 +1,17 @@
+{% macro grid(class, id, title, icon, content_type, content, clickable = False) %}
+    <div class="{{ class }}{% if clickable %}{{ " clickable" }}{% endif %} card" id="{{ id }}">
+        <div class="grid-upper">
+            <div class="grid-title">
+                {{ title }}
+            </div>
+            <div class="grid-icon">
+                <i class="{{ icon }}"></i>
+            </div>
+        </div>
+        <div class="grid-lower">
+            <div class="grid-content {{ content_type }}">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

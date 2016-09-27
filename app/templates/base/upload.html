@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+    <!-- Custom css for this page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/file_upload/style.css') }}">
+    <!-- blueimp Gallery styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/file_upload/blueimp-gallery.min.css') }}">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/file_upload/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/file_upload/jquery.fileupload-ui.css') }}">
+    <!-- CSS adjustments for browsers with JavaScript disabled -->
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/file_upload/jquery.fileupload-noscript.css') }}"></noscript>
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/file_upload/jquery.fileupload-ui-noscript.css') }}"></noscript>
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.ui.widget.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/file_upload/tmpl.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.ui.widget.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/file_upload/load-image.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/file_upload/canvas-to-blob.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sass-bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.blueimp-gallery.min.js') }}"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.iframe-transport.js') }}"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload.js') }}"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload-process.js') }}"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload-image.js') }}"></script>
+    <!-- The File Upload audio preview plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload-audio.js') }}"></script>
+    <!-- The File Upload video preview plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload-video.js') }}"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload-validate.js') }}"></script>
+    <!-- The File Upload user interface plugin -->
+    <script src="{{ url_for('static', filename='js/file_upload/jquery.fileupload-ui.js') }}"></script>
+    <!-- The main application script -->
+    <script src="{{ url_for('static', filename='js/file_upload/main.js') }}"></script>
+{% endblock %}

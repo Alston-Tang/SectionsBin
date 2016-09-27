@@ -1,0 +1,479 @@
+{% extends 'base/nav.html' %}
+{% block extra_css %}
+    <!-- JQuery Context Menu-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/jquery.contextMenu.css') }}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/font-awesome/css/font-awesome.min.css') }}">
+    <!-- Pick a color -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/pick-a-color-1.2.3.min.css') }}">
+    <!-- Least.js CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/least.min.css') }}">
+    <!-- Custom styles for IndexBoard -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/my.css') }}">
+{% endblock %}
+{% block content %}
+{% endblock %}
+
+{% block extra_js %}
+    {% raw %}
+    <script type="text/blueimp-tmpl" id="size-panel">
+        <label>width
+            <input class="form-control width" value={%#o.width%}>
+        </label>
+        <label>height
+            <input class="form-control height" value={%#o.height%}>
+        </label>
+        <label>layer
+            <input class="form-control layer" value={%#o.layer%}>
+        </label>
+    </script>
+    <script type="text/blueimp-tmpl" id="advanced-panel">
+        <label>innerHTML
+            <textarea rows='30' style="width:{%#o.panelWidth-20%}px" class="form-control innerHTML">{%=o.html%}</textarea>
+        </label>
+    </script>
+    <script type="text/blueimp-tmpl" id="delete-panel">
+        <h2 style="margin-left:10px">Delete this element?</h2>
+    </script>
+    <script type="text/blueimp-tmpl" id="animation-panel">
+        {% for (var i=0; i<o.animation.length; i++) { %}
+        <div class='animation'>
+          {% var cur=o.animation[i]; %}
+          <label>type
+              <select class="form-control type" disabled>
+                  <option value="fade" {%if (cur.type=='fade'){ %} selected {% } %}>fade in</option>
+                  <option value="move" {%if (cur.type=='move'){ %} selected {% } %}>move</option>
+                  <option value="resize" {%if (cur.type=='resize'){ %} selected {% } %}>resize</option>
+              </select>
+          </label>
+          <label>trigger
+              <select class="form-control trigger">
+                  <option value="first" {%if (cur.trigger=='first'){ %} selected {% } %}>first time</option>
+              </select>
+          </label>
+          <label>speed
+              <input class="form-control speed" value="{%#cur.speed%}">
+          </label>
+          {% if (cur.type=='move'){ %}
+            <label>origin top
+                <input class="form-control oriTop" value="{%#cur.oriTop%}">
+            </label>
+            <label>origin left
+                <input class="form-control oriLeft" value="{%#cur.oriLeft%}">
+            </label>
+            <label>destination top
+                <input class="form-control dstTop" value="{%#cur.dstTop%}">
+            </label>
+            <label>destination left
+                <input class="form-control dstLeft" value="{%#cur.dstLeft%}">
+            </label>
+          {% } %}
+          {% if (cur.type=='resize'){ %}
+            <label>origin width
+                <input class="form-control oriWidth" value="{%#cur.oriWidth%}">
+            </label>
+            <label>origin height
+                <input class="form-control oriHeight" value="{%#cur.oriHeight%}">
+            </label>
+            <label>destination width
+                <input class="form-control dstWidth" value="{%#cur.dstWidth%}">
+            </label>
+            <label>destination height
+                <input class="form-control dstHeight" value="{%#cur.dstHeight%}">
+            </label>
+          {% } %}
+          <br>
+          <i class="fa fa-minus fa-2x" style="color:red; margin:10px 50px;" title="remove this animation"></i>
+          <br><hr style="margin:0">
+        </div>
+        {% } %}
+        <i class="fa fa-plus fa-2x" style="color:green; margin:50px; title="add a new animation"></i>
+    </script>
+    <script type="text/blueimp-tmpl" id="animation-new-panel">
+        <label>type
+            <select class="form-control type">
+                <option value="fade">fade in</option>
+                <option value="move">move</option>
+                <option value="resize">resize</option>
+            </select>
+            <br>
+            <button type="button" class="btn btn-success">Add</button>
+            <hr>
+        </label>
+    </script>
+    <script type="text/blueimp-tmpl" id="commonPanel">
+        <label>type
+            <select class="form-control type" disabled>
+                <option value="fade" {%if (o.type=='fade'){ %} selected {% } %}>fade in</option>
+                <option value="move" {%if (o.type=='move'){ %} selected {% } %}>move</option>
+                <option value="resize" {%if (o.type=='resize'){ %} selected {% } %}>resize</option>
+            </select>
+        </label>
+        <label>trigger
+            <select class="form-control trigger">
+                <option value="first">first time</option>
+            </select>
+        </label>
+        <label>speed
+            <input class="form-control speed">
+        </label>
+    </script>
+    <script type="text/blueimp-tmpl" id="fadePanel">
+         <i class="fa fa-minus fa-2x" style="color:red; margin:10px 50px;" title="remove this animation"></i>
+    </script>
+    <script type="text/blueimp-tmpl" id="movePanel">
+        <label>origin top
+                <input class="form-control oriTop">
+            </label>
+            <label>origin left
+                <input class="form-control oriLeft">
+            </label>
+            <label>destination top
+                <input class="form-control dstTop">
+            </label>
+            <label>destination left
+                <input class="form-control dstLeft">
+        </label>
+        <br>
+        <i class="fa fa-minus fa-2x" style="color:red; margin:10px 50px;" title="remove this animation"></i>
+    </script>
+    <script type="text/blueimp-tmpl" id="resizePanel">
+        <label>origin width
+                <input class="form-control oriWidth">
+            </label>
+            <label>origin height
+                <input class="form-control oriHeight">
+            </label>
+            <label>destination width
+                <input class="form-control dstWidth">
+            </label>
+            <label>destination height
+                <input class="form-control dstHeight">
+            </label>
+        </label>
+        <br>
+        <i class="fa fa-minus fa-2x" style="color:red; margin:10px 50px;" title="remove this animation"></i>
+    </script>
+    <script type="text/blueimp-tmpl" id="textSub">
+        <div class="row">
+            <div class="col-md-12">
+                <label>Content
+                    <textarea class="form-control content" style='width:{%#o.panelWidth-20 %}px' rows=10></textarea>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+            <label> Text color
+                <input onblur="$('#jcoawijejr').css('color',$(this).val())" class="form-control textColor">
+            </label>
+            <label> Text size
+                <input onblur="$('#jcoawijejr').css('font-size',$(this).val())" class="form-control textSize">
+            </label>
+            <p id="jcoawijejr" class='demo' style="margin-left:20px;width:50px;height:50px">Demo</p>
+            </div>
+            <div class="col-md-6">
+            <label>Style
+                <textarea class="form-control textStyle" onblur="$('#jcoawijejr').attr('style',$(this).val())"></textarea>
+            </label>
+            </div>
+        </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="imageSubInit">
+    <div id='imageSubContainer'>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="imageSub">
+    {% for (var i=0; i<o.total; i++){ %}
+          <div class="col-md-3">
+              <a href='#' src-data="{%#o.data[i][1]%}" class='thumbnail'>
+                  <img src="{%#o.data[i][0]%}"></img>
+              </a>
+          </div>
+    {% } %}
+    </script>
+
+    <script type="text/blueimp-tmpl" id="textContent">
+    <div class="row">
+        <div class="col-md-12">
+            <p style="{%#o.style%}" class='content'>{%=o.content%}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class='btn edit'>Edit</button>
+        </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="imgContent">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <img class="image img-responsive" src='{%#o.imgSrc%}'></img>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn edit">Edit</button>
+        </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="picture-wallContent">
+    <div id="main-area-for">
+    {% for(var i=0; i<o.img.length; i++){ %}
+    <div class="row content" style="margin:5px">
+        <div class="col-md-3">
+            <img class="img-responsive" src="{%#o.img[i].thumbnail%}" src-data="{%#o.img[i].src%}"></img>
+        </div>
+        <div class="col-md-4">
+            <label> Title
+            <input class="form-control" value="{%=o.img[i].title%}"></input>
+            </label>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-primary edit">Edit</button>
+            <button class="btn btn-danger remove" style="margin-left:20px">Remove</button>
+        </div>
+    </div>
+    {% } %}
+    </div>
+    <hr>
+    <div class="row" style="margin:5px">
+        <div class="col-md-3">
+            <button class="btn btn-success add">Add</button>
+        </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="picture-wallItem">
+        <div class="col-md-3">
+            <img class="img-responsive" src=""></img>
+        </div>
+        <div class="col-md-4">
+            <label> Title
+            <input class="form-control" value=""></input>
+            </label>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-primary edit">Edit</button>
+            <button class="btn btn-danger remove" style="margin-left:20px">Remove</button>
+        </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="picture-wallCreate">
+    <section class="least-container">
+        <ul class="least-gallery">
+        {% for (var i=0; i<o.length; i++) { %}
+            <li>
+                <a href="{%#o[i].src%}" title="{%#o[i].title%}">
+                    <img src="{%#o[i].thumbnail%}"></img>
+                </a>
+            </li>
+        {% } %}
+        </ul>
+    </section>
+    </script>
+    <script type="text/blueimp-tmpl" id="bootstrapCarouselContent">
+    <div id="carousel_for">
+    {% for (var i=0; i<o.img.length; i++) { %}
+    <div class="inf-group" style="margin:5px">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-responsive" src="{%#o.img[i].src%}"></img>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" value="{%=o.img[i].title%}"></input>
+            </div>
+            <div class="col-md-5">
+                <button class="btn btn-primary edit">Edit</button>
+                <button class="btn btn-danger remove" style="margin-left:20px">Remove</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <textarea class="form-control" rows="3">{%=o.img[i].desc%}</textarea>
+            </div>
+        </div>
+    </div>
+    {% } %}
+    </div>
+    <hr>
+    <div class="row" style="margin:5px">
+        <div class="col-md-3">
+            <button class="btn btn-success add">Add</button>
+        </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="bootstrapCarouselItem">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-responsive" src=""></img>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" value=""></input>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-primary edit">Edit</button>
+            <button class="btn btn-danger remove" style="margin-left:20px">Remove</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="bootstrapCarouselCreate">
+    <div class="carousel slide" id="{%#o.id%}" data-ride="carousel">
+        <ol class="carousel-indicators">
+        {% for (var i=0; i<o.img.length; i++) { %}
+            <li data-target="#{%#o.id%}" data-slide-to="{%#i%}" {% if (i==0) { %}class="active"{% } %}></li>
+        {% } %}
+        </ol>
+        <div class="carousel-inner">
+        {% for (var j=0; j<o.img.length; j++) { %}
+            <div class="item {% if (j==0) { %}active{% } %}">
+                <img src="{%#o.img[j].src%}">
+                <div class="carousel-caption">
+                    <h3>{%=o.img[j].title%}</h3>
+                    <p>{%=o.img[j].desc%}</p>
+                </div>
+            </div>
+        {% } %}
+        </div>
+        <a class="left carousel-control" href="#{%#o.id%}" data-slide="prev">
+            <i class="fa fa-angle-left icon-prev"></i>
+        </a>
+        <a class="right carousel-control" href="#{%#o.id%}" data-slide="next">
+            <i class="fa fa-angle-right icon-next"></i>
+        </a>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="bootstrapJumbotronContent">
+    <div style="margin:5px">
+    <div class="row">
+        <div class="col-md-6">
+            <label>Title</label>
+            <input class="form-control title" value="{%=o.title%}"></input>
+        </div>
+        <div class="col-md-3">
+            <label>Background Color</label>
+            <input class="form-control pick-a-color color" type="text" value="{%#o.color%}"></input>
+        </div>
+        <div class="col-md-3">
+            <label>Text Color</label>
+            <input class="form-control pick-a-color textColor" type="text" value="{%#o.textColor%}"></input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label>Content</label>
+            <textarea class="content form-control" style="width:100%" rows="3">{%=o.content%}</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Button link</label>
+            <input class="form-control link" value="{%#o.link%}"></input>
+        </div>
+        <div class="col-md-3">
+            <label>Button text</label>
+            <input class="form-control btnText" value="{%#o.btnText%}"></input>
+        </div>
+        <div class="col-md-3">
+            <label>Button type</label>
+            <select class="form-control button">
+                {% for (var i=0; i<o.btnTypes.length; i++) { %}
+                    <option value="{%#o.btnTypes[i]%}" {% if(o.button==o.btnTypes[i]) { %}selected{% } %}>{%=o.btnTypes[i]%}</option>
+                {% } %}
+            </select>
+        </div>
+    </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="bootstrapJumbotronCreate">
+    <div class="jumbotron" style="background-color: {%#o.color%}">
+        <h1 class="title" style="color:{%#o.textColor%}">{%=o.title%}</h1>
+        <p class="content" style="color:{%#o.textColor%}">{%=o.content%}</p>
+        <p><a class="btn {%#o.btnType%} btn-lg" role="button">{%=o.btnText%}</a></p>
+    </div>
+    </script>
+    <!-- Section setting -->
+    <script type="text/blueimp-tmpl" id="sectionSetting">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Background
+            <img class="img-responsive background" src="{%#o.boardBackground%}"></img>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary edit">Edit</button>
+            <button class="btn btn-warning null">Set to null</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <label>Title
+                <input class="form-control title" value={%#o.title%}></input>
+            </label>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <label>Height
+                <input value="{%#o.height%}" type="text" class="form-control height"></input>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label>Color
+                <input value="{%#o.background%}" class="form-control pick-a-color" type="text"></input>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label>Opacity
+                <input value="{%#o.backgroundOpacity%}" class="form-control opacity" type="text"></input>
+            </label>
+        </div>
+    </div>
+    </script>
+    <script type="text/blueimp-tmpl" id="sectionInformation">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+            <h3>Creator:</h3>
+        </div>
+        <div class="col-md-8">
+            <h3>{%=o.creator%}</h3>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <h3>Create time:</h3>
+        </div>
+        <div class="col-md-8">
+            <h3>{%=o.createTime%}</h3>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <h3>Modified time:</h3>
+        </div>
+        <div class="col-md-8">
+            <h3>{%=o.modifiedTime%}</h3>
+        </div>
+    </div>
+    </script>
+    {% endraw %}
+    <script src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/least.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/indexBoard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tinycolor-0.9.15.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pick-a-color-1.2.3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pointerevents.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.contextMenu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.ui.position.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tmpl.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/draggable-touch.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tools.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/indexEditor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/edit.js') }}"></script>
+{% endblock %}
+

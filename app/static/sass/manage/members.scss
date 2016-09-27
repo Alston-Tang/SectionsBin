@@ -1,0 +1,21 @@
+@import "../design/card";
+@import "../design/color";
+
+body{
+  background-color: $grey-background;
+}
+
+#member-inf{
+  #member-count{
+    width: 60%;
+    font-size: 36px;
+    color: $member-color;
+  }
+}
+
+#member-list{
+  margin-top: 20px;
+  .member-id{
+    display: none;
+  }
+}

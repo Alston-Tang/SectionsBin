@@ -1,0 +1,1 @@
+from app.plugins import jinjia2_plugins

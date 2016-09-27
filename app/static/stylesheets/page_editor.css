@@ -1,0 +1,95 @@
+/* line 8, ../design/card.scss */
+.card {
+  background-color: white;
+  border-radius: 5px;
+  border: 3px solid #f0f0f0;
+  box-shadow: 1px 2px 1px #888888;
+  padding: 20px; }
+
+/* line 16, ../design/card.scss */
+.grid-slot {
+  overflow: hidden; }
+
+/* line 75, ../design/card.scss */
+.block-header {
+  padding-left: 50px;
+  padding-top: 50px; }
+  /* line 78, ../design/card.scss */
+  .block-header > h1, .block-header h2, .block-header h3, .block-header h4, .block-header h5, .block-header h6 {
+    font-weight: bold; }
+
+/* line 5, page_editor.scss */
+body {
+  background-color: #eeeeee; }
+
+/* line 9, page_editor.scss */
+.thm-col {
+  margin: 2%;
+  position: relative;
+  float: left; }
+  /* line 13, page_editor.scss */
+  .thm-col > img {
+    width: 100%; }
+
+/* line 17, page_editor.scss */
+.thm-left-col {
+  width: 36%; }
+
+/* line 21, page_editor.scss */
+.thm-middle-col {
+  width: 26%; }
+  /* line 23, page_editor.scss */
+  .thm-middle-col > #assemble-area {
+    min-height: 100px;
+    border-radius: 6px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none; }
+  /* line 32, page_editor.scss */
+  .thm-middle-col > #delete-group {
+    margin: 20px 0;
+    position: relative; }
+    /* line 35, page_editor.scss */
+    .thm-middle-col > #delete-group > #delete-area {
+      border-radius: 5px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0);
+      -ms-user-select: none;
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none; }
+    /* line 45, page_editor.scss */
+    .thm-middle-col > #delete-group > #delete-area-base {
+      background-color: #f2dede;
+      color: #a94442;
+      font-size: 2em;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 200px;
+      width: 100%;
+      z-index: -1; }
+
+/* line 61, page_editor.scss */
+.thm-right-col {
+  width: 26%; }
+
+/* line 65, page_editor.scss */
+.section {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px; }
+  /* line 66, page_editor.scss */
+  .section h1, .section h2, .section h3, .section h4, .section h5, .section h6 {
+    margin-top: 0;
+    border-top: 0; }
+  /* line 74, page_editor.scss */
+  .section > .preview-img {
+    display: none; }
+  /* line 78, page_editor.scss */
+  .section > .section-id {
+    display: none; }

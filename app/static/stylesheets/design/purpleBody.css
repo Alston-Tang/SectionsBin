@@ -1,0 +1,7 @@
+/* line 1, design/purpleBody.scss */
+body {
+  background-color: purple; }
+  /* line 3, design/purpleBody.scss */
+  body .title {
+    font-size: 108px;
+    color: #ffffff; }

@@ -1,0 +1,23 @@
+/* line 8, ../design/card.scss */
+.card {
+  background-color: white;
+  border-radius: 5px;
+  border: 3px solid #f0f0f0;
+  box-shadow: 1px 2px 1px #888888;
+  padding: 20px; }
+
+/* line 16, ../design/card.scss */
+.grid-slot {
+  overflow: hidden; }
+
+/* line 75, ../design/card.scss */
+.block-header {
+  padding-left: 50px;
+  padding-top: 50px; }
+  /* line 78, ../design/card.scss */
+  .block-header > h1, .block-header h2, .block-header h3, .block-header h4, .block-header h5, .block-header h6 {
+    font-weight: bold; }
+
+/* line 4, pages.scss */
+body {
+  background-color: #eeeeee; }

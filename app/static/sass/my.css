@@ -1,0 +1,36 @@
+body {
+  overflow-x: hidden;
+  overflow-y: visible; }
+
+#index-board {
+  margin: 0;
+  border: 0;
+  padding: 0; }
+  #index-board .background-board {
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 0; }
+    #index-board .background-board img {
+      width: 100%;
+      height: 100%;
+      z-index: 0; }
+  #index-board section {
+    width: 100%;
+    z-index: 10;
+    opacity: 1; }
+    #index-board section .section-board {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 11; }
+    #index-board section > div {
+      position: absolute;
+      z-index: 20;
+      visibility: hidden; }
+      #index-board section > div .animation {
+        display: none; }
+
+#edit-modal .modal-body label {
+  margin-left: 10px; }

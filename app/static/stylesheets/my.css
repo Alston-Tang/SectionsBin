@@ -1,0 +1,53 @@
+/* line 1, ../sass/my.scss */
+body {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* line 7, ../sass/my.scss */
+#index-board {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+/* line 11, ../sass/my.scss */
+#index-board .background-board {
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 0;
+}
+/* line 17, ../sass/my.scss */
+#index-board .background-board img {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+/* line 24, ../sass/my.scss */
+#index-board section {
+  width: 100%;
+  z-index: 10;
+  opacity: 1;
+}
+/* line 28, ../sass/my.scss */
+#index-board section .section-board {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+}
+/* line 34, ../sass/my.scss */
+#index-board section > div {
+  position: absolute;
+  z-index: 20;
+}
+/* line 38, ../sass/my.scss */
+#index-board section > div .animation {
+  display: none;
+}
+
+/* line 47, ../sass/my.scss */
+#edit-modal .modal-body label {
+  margin-left: 10px;
+}
