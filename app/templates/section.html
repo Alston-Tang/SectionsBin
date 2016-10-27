@@ -12,7 +12,7 @@
             {% endif %}
         <div class="col-md-3">
             <div class="thumbnail card">
-                <img class="img-responsive" src="{{ section.preview_img['data'] }}">
+                <img class="img-responsive" src="{{ section.preview_img }}">
                 <div class="caption">
                     <h3>{{ section.title }}</h3>
                     <p>Creator:  {{ section.creator }}</p>
@@ -20,7 +20,7 @@
                     <p>Modified Time:  {{ section.modified_time|pretty_date }}</p>
                     <p>
                         <a href="{{ url_for('edit_fn') }}?sec={{ section.id }}" class="btn btn-primary" role="button">Edit</a>
-                        <a  class="btn btn-danger remove-section" section="{{ section._id }}" role="button">Remove</a>
+                        <a  class="btn btn-danger remove-section" section="{{ section.id }}" role="button">Remove</a>
                     </p>
                 </div>
             </div>

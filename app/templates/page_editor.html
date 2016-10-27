@@ -1,0 +1,54 @@
+{% extends 'base/nav.html' %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename="stylesheets/noIndexBoard.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/page_editor.css') }}">
+{% endblock %}
+{% block content %}
+    <input id="page-id" type="hidden" value="{{ required_page.id if required_page != None }}">
+    <div class="contentBelowNav">
+        <div class="thm-left-col thm-col" id="page-preview">
+        </div>
+        <div class="thm-middle-col thm-col">
+            <div class="alert alert-success">Page title</div>
+            <div id="setting-area">
+                <input value="{{ required_page['title'] if required_page != None }}" id="title-area" class="form-control" title="Page name" placeholder="Page title">
+            </div>
+            <div id="delete-group">
+                <div id="delete-area-base" class="alert alert-danger" role="alert">Drag to here to delete</div>
+                <div id="delete-area"></div>
+            </div>
+            <div class="alert alert-info" role="alert">Sections belong to page</div>
+            <div id="assemble-area">
+                {% for section in required_page.sections %}
+                    <div class="section card">
+                        <h3>{{ section.title }}</h3>
+                        <p>Creator:  {{ section.creator }}</p>
+                        <p>Create Time:  {{ section.created_time|pretty_date }}</p>
+                        <p>Modified Time:  {{ section.modified_time|pretty_date }}</p>
+                        <p class="section-id">{{ section.id }}</p>
+                        <p class="preview-img"></p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="thm-right-col thm-col">
+            <div class="alert alert-success" role="alert">Sections</div>
+            <div id="sections-pool">
+                {% for section in sections %}
+                    <div class="section card">
+                        <h3>{{ section.title }}</h3>
+                        <p>Creator:  {{ section.creator }}</p>
+                        <p>Create Time:  {{ section.created_time|pretty_date }}</p>
+                        <p>Modified Time:  {{ section.modified_time|pretty_date }}</p>
+                        <p class="section-id">{{ section.id }}</p>
+                        <p class="preview-img">{{ section.preview_img }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{{ url_for('static',filename='js/manage/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/manage/page_editor.js') }}"></script>
+{% endblock %}
