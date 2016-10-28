@@ -1,4 +1,4 @@
-from models import Page
+from app.models import Page
 
 editor_left = {"Add": {"_type": "drop_down",
                        "data": {
