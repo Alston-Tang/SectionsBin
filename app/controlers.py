@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, jsonify, abort
+from flask import render_template, request, jsonify, abort, redirect, url_for
 from datetime import datetime
 from app.dynamic import nav
 from app.models import *
@@ -54,7 +54,7 @@ def section_fn():
         cur_section = Section(title=title, creator=creator, modified_time=modified_time,
                               created_time=created_time, content=content, preview_img=preview_img)
         cur_section.save(force_insert=True)
-        return jsonify({"success": True})
+        return jsonify({"success": True, "id": str(cur_section.id)})
 
     elif request.method == "PUT":
         section_id = request.form.get('id', None)
@@ -76,7 +76,7 @@ def section_fn():
         section.modified_time = datetime.today()
         section.preview_img = request.form.get('preview_img', False)
         section.save()
-        return jsonify({"success": True})
+        return jsonify({"success": True, "id": str(section.id)})
 
     elif request.method == "DELETE":
         section_id = request.form.get('id', None)
