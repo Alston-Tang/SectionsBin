@@ -104,8 +104,6 @@ def edit_page_fn():
         sections.append(section)
     if page_id:
         page = Page.objects.get(id=page_id)
-        if page:
-            sections = page.sections
     if page:
         return render_template('page_editor.html', sections=sections,
                                required_page=page,
