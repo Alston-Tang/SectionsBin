@@ -10,7 +10,10 @@ from app import file
 
 @app.route('/')
 def index_fn():
-    return "Index"
+    if len(Page.objects) <= 0:
+        return redirect(url_for("section_fn"))
+    page = Page.objects.first()
+    return redirect(url_for("page_by_title_fn", page_title=page.title))
 
 @app.route('/editor/section')
 def edit_fn():
