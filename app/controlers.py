@@ -174,6 +174,15 @@ def page_fn():
         return jsonify({'success': True, "id": str(page.id)})
 
 
+@app.route("/page/<page_title>")
+def page_by_title_fn(page_title):
+    page = Page.objects(title=page_title)
+    if len(page) > 1 or len(page) <= 0:
+        return render_template("error/404.html")
+    page = page.first()
+    return render_template("basic_page.html", title=page.title, page=page)
+
+
 @app.route("/file")
 def file_fn():
     return app.send_static_file('html/file_upload.html')
