@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, abort
 from datetime import datetime
 from app.dynamic import nav
 from app.models import *
@@ -18,7 +18,9 @@ def edit_fn():
     section_id = request.args.get('sec', None)
     section = None
     if section_id:
-        section = Section.objects.get(id=section_id)
+        try: section = Section.objects.get(id=section_id)
+        except (DoesNotExist, ValidationError):
+            pass
     if section:
         template = render_template('editor.html',
                                    section=section.content,
@@ -58,8 +60,8 @@ def section_fn():
         section_id = request.form.get('id', None)
         if not section_id:
             return jsonify({'error': 'Unknown section id'})
-        section = Section.objects.get(id=section_id)
-        if not section:
+        try: section = Section.objects.get(id=section_id)
+        except (DoesNotExist, ValidationError):
             return jsonify({'error': 'Unknown section id'})
         title = request.form.get('title', "")
         content = request.form.get('content', "")
@@ -80,8 +82,8 @@ def section_fn():
         section_id = request.form.get('id', None)
         if not section_id:
             return jsonify({'error': 'Unknown section id'})
-        section = Section.objects.get(id=section_id)
-        if not section:
+        try: section = Section.objects.get(id=section_id)
+        except (DoesNotExist, ValidationError):
             return jsonify({'error': 'Unknown section id'})
         if len(Page.objects(sections__in=[section])) > 0:
             return jsonify({'error': 'This section is used by at least 1 page'})
@@ -103,7 +105,9 @@ def edit_page_fn():
     for section in Section.objects:
         sections.append(section)
     if page_id:
-        page = Page.objects.get(id=page_id)
+        try: page = Page.objects.get(id=page_id)
+        except (DoesNotExist, ValidationError):
+            pass
     if page:
         return render_template('page_editor.html', sections=sections,
                                required_page=page,
@@ -148,8 +152,8 @@ def page_fn():
         page_id = request.form.get('id', None)
         if not page_id:
             return jsonify({'error': 'Unknown page id'})
-        page = Page.objects.get(id=page_id)
-        if not page:
+        try: page = Page.objects.get(id=page_id)
+        except (DoesNotExist, ValidationError):
             return jsonify({'error': 'Unknown page id'})
 
         data = json.loads(request.form.get('data', "[]"))
@@ -178,7 +182,7 @@ def page_fn():
 def page_by_title_fn(page_title):
     page = Page.objects(title=page_title)
     if len(page) > 1 or len(page) <= 0:
-        return render_template("error/404.html")
+        abort(404)
     page = page.first()
     return render_template("basic_page.html", title=page.title, page=page)
 
@@ -210,5 +214,10 @@ def main_delete(file_name):
     if not request.method == 'DELETE':
         pass
     return file.upload_test.delete(file_name)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error/404.html'), 404
 
 
