@@ -83,7 +83,7 @@ indexEditor.save.preDone=function(canvas){
     var title= $(b.con[0].dom).attr('section-title');
     var previewImg=canvas.toDataURL('image/jpeg');
     var saveUrl = $("#sectionInf").find("input.save_url").val();
-    var type = id ? "PUT" : "POST";
+    var type = id != "None" ? "PUT" : "POST";
     $.ajax(saveUrl,{
         type:type,
         success:indexEditor.save.success,

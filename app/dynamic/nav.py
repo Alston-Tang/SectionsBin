@@ -14,5 +14,7 @@ editor_left = {"Add": {"_type": "drop_down",
                }
 
 editor_right = {"Save": {"_type": "button", "data": {"id": "btn-save", "style": "cursor: pointer"}}}
+page_right = {"Add": {"_type": "button", "data": {"href": "editor/page"}}}
+section_right = {"Add": {"_type": "button", "data": {"href": "editor/section"}}}
 
 nav = {"editor_left": editor_left, "editor_right": editor_right}

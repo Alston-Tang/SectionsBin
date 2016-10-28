@@ -72,14 +72,14 @@ PageEditor.title=function(){
 
 PageEditor.save = {};
 PageEditor.save.request=function(){
+    var type = document.getElementById('page-id').value ? 'PUT' : 'POST';
     var data=PageEditor._serialize();
     var pageId = document.getElementById('page-id').value;
     data=JSON.stringify(data);
-    $.ajax("/manage/page_editor",{type:"POST", data:{id:pageId, data:data, title:PageEditor.title()}, success:PageEditor.save.success, error:PageEditor.save.error})
+    $.ajax("/page",{type:type, data:{id:pageId, data:data, title:PageEditor.title()}, success:PageEditor.save.success, error:PageEditor.save.error})
 };
 
 PageEditor.save.success=function(data, textStatus, jqXHR){
-    data=JSON.parse(data);
     if (data.success){
         document.getElementById('page-id').value=data.id;
         alert("success");

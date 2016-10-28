@@ -9,7 +9,7 @@ $(document).ready(function(){
 });
 
 var removeSection=function(id){
-    $.ajax('/manage/sections',{
+    $.ajax('/section',{
         type:'DELETE',
         data:{id:id},
         success:removeSuccess,
@@ -18,12 +18,14 @@ var removeSection=function(id){
 };
 
 var removeSuccess= function (data) {
-    data=JSON.parse(data);
     if (data.success){
         location.reload();
+    }
+    else {
+        removeError(data);
     }
 };
 
 var removeError = function(data) {
-    alert('Delete failed!')
+    alert("Error: " + data.error);
 };
