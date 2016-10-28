@@ -127,7 +127,14 @@ def page_fn():
                                nav_bar_right=nav.page_right)
 
     if request.method == 'DELETE':
-        return jsonify({'error': 'Sorry, you are not allowed to delete page'})
+        page_id = request.form.get('id', None)
+        if not page_id:
+            return jsonify({"error": "Unknown id"})
+        try: page = Page.objects.get(id=page_id)
+        except (DoesNotExist, ValidationError):
+            return jsonify({"error": "Unknown id"})
+        page.delete()
+        return jsonify({"success": True})
 
     if request.method == 'POST':
         data = json.loads(request.form.get('data', "[]"))
