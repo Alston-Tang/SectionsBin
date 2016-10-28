@@ -71,9 +71,7 @@ def section_fn():
             return jsonify({'error': 'Empty title'})
         section.title = title
         section.content = content
-        section.create_time = datetime.strptime(request.form.get('create_time', datetime.today().strftime('%Y/%m/%d %H:%M')),
-                                        '%Y/%m/%d %H:%M')
-        section.modified_time = datetime.today()
+        section.modified_time = datetime.utcnow()
         section.preview_img = request.form.get('preview_img', False)
         section.save()
         return jsonify({"success": True, "id": str(section.id)})
