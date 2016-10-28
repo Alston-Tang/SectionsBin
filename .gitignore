@@ -1,0 +1,4 @@
+/.idea
+**.pyc
+/app/static/upload/*
+**/__pycache__/**
