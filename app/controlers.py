@@ -12,7 +12,6 @@ from app import file
 def index_fn():
     return "Index"
 
-
 @app.route('/editor/section')
 def edit_fn():
     section_id = request.args.get('sec', None)
@@ -189,7 +188,7 @@ def page_by_title_fn(page_title):
     if len(page) > 1 or len(page) <= 0:
         abort(404)
     page = page.first()
-    return render_template("basic_page.html", title=page.title, page=page)
+    return render_template("basic_page.html", title=page.title, page=page, nav_bar=nav.gen_page_left())
 
 
 @app.route("/file")

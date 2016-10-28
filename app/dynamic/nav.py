@@ -1,3 +1,5 @@
+from models import Page
+
 editor_left = {"Add": {"_type": "drop_down",
                        "data": {
                            "Text": {"class": "editor-nav add-text", "add": "text"},
@@ -18,3 +20,9 @@ page_right = {"Add": {"_type": "button", "data": {"href": "editor/page"}}}
 section_right = {"Add": {"_type": "button", "data": {"href": "editor/section"}}}
 
 nav = {"editor_left": editor_left, "editor_right": editor_right}
+
+def gen_page_left():
+    rv = {}
+    for page in Page.objects:
+        rv[page.title] = {"_type": "button", "data": {"href": '/page/%s' % page.title}}
+    return rv
